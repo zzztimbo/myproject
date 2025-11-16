@@ -15,6 +15,11 @@
         "command": "  mkdir -p $out/bin\n  go build\n  cp hello $out/bin/hello\n",
         "description": "My custom program printing hello world in Go"
       },
+      "hello-multiplatform": {
+        "command": "  mkdir -p $out/bin\n  \n  # Build for Linux (amd64)\n  echo \"Building for Linux (amd64)...\"\n  GOOS=linux GOARCH=amd64 go build -ldflags=\"-s -w\" -o $out/bin/hello-linux-amd64 main.go\n  \n  # Build for Linux (arm64)\n  echo \"Building for Linux (arm64)...\"\n  GOOS=linux GOARCH=arm64 go build -ldflags=\"-s -w\" -o $out/bin/hello-linux-arm64 main.go\n  \n  # Build for macOS (amd64)\n  echo \"Building for macOS (amd64)...\"\n  GOOS=darwin GOARCH=amd64 go build -ldflags=\"-s -w\" -o $out/bin/hello-darwin-amd64 main.go\n  \n  # Build for macOS (arm64)\n  echo \"Building for macOS (arm64)...\"\n  GOOS=darwin GOARCH=arm64 go build -ldflags=\"-s -w\" -o $out/bin/hello-darwin-arm64 main.go\n  \n  # Build for Windows (amd64)\n  echo \"Building for Windows (amd64)...\"\n  GOOS=windows GOARCH=amd64 go build -ldflags=\"-s -w\" -o $out/bin/hello-windows-amd64.exe main.go\n  \n  echo \"Multi-platform builds complete!\"\n  ls -lh $out/bin/\n",
+        "version": "1.0.0",
+        "description": "Multi-platform builds for hello (Linux, macOS, Windows)"
+      },
       "hello-opt": {
         "command": " \n  go build -ldflags=\"-s -w\" -gcflags=\"-l=4\"\n  mkdir -p $out/bin\n  cp hello $out/bin/hello\n",
         "version": "1.0.0",

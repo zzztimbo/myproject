@@ -108,6 +108,36 @@ command = '''
 description = "A program that greets you, very quickly"
 version = "1.0.0"
 
+[build.hello-multiplatform]
+description = "Multi-platform builds for hello (Linux, macOS, Windows)"
+version = "1.0.0"
+command = '''
+  mkdir -p $out/bin
+  
+  # Build for Linux (amd64)
+  echo "Building for Linux (amd64)..."
+  GOOS=linux GOARCH=amd64 go build -ldflags="-s -w" -o $out/bin/hello-linux-amd64 main.go
+  
+  # Build for Linux (arm64)
+  echo "Building for Linux (arm64)..."
+  GOOS=linux GOARCH=arm64 go build -ldflags="-s -w" -o $out/bin/hello-linux-arm64 main.go
+  
+  # Build for macOS (amd64)
+  echo "Building for macOS (amd64)..."
+  GOOS=darwin GOARCH=amd64 go build -ldflags="-s -w" -o $out/bin/hello-darwin-amd64 main.go
+  
+  # Build for macOS (arm64)
+  echo "Building for macOS (arm64)..."
+  GOOS=darwin GOARCH=arm64 go build -ldflags="-s -w" -o $out/bin/hello-darwin-arm64 main.go
+  
+  # Build for Windows (amd64)
+  echo "Building for Windows (amd64)..."
+  GOOS=windows GOARCH=amd64 go build -ldflags="-s -w" -o $out/bin/hello-windows-amd64.exe main.go
+  
+  echo "Multi-platform builds complete!"
+  ls -lh $out/bin/
+'''
+
 ## Other Environment Options -----------------------------------------
 [options]
 # Systems that environment is compatible with
